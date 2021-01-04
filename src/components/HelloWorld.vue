@@ -6,46 +6,25 @@
             <el-row>
                 <el-col :span="6" class="rows row-left">
                     <el-col :span="24">
-                        <xk-charts
-                            :id="'starId'"
-                            :title="'店铺星级分类'"
-                            :barData="star_rating"
-                            :unit="'家'"
-                        ></xk-charts>
+                        <xk-charts :id="'starId'" :title="'店铺星级分类'" :barData="star_rating" :unit="'家'"></xk-charts>
                     </el-col>
                     <el-col :span="24">
-                        <xk-double
-                            :id="'doubleId'"
-                            :title="'其他评分统计'"
-                            :barData="other_score"
-                            :unit="'家'"
-                            :legend="other_type"
-                        ></xk-double>
+                        <xk-double :id="'doubleId'" :title="'其他评分统计'" :barData="other_score" :unit="'家'" :legend="other_type" ></xk-double>
                     </el-col>
                     <el-col :span="24">
-                        <xk-charts
-                            :id="'reviewId'"
-                            :title="'店铺评论数量统计'"
-                            :barData="review_count"
-                            :unit="'家'"
-                        ></xk-charts>
+                        <xk-charts :id="'reviewId'" :title="'店铺评论数量统计'" :barData="review_count" :unit="'家'"></xk-charts>
                     </el-col>
                 </el-col>
                 <el-col :span="18" class="rows row-center">
-                   
-                <el-col :span="14">
-                     <div id="map" style="width: 100%; height: 100%"></div>
-                </el-col>
-                <el-col :span="10">
-                    <xk-pie
-                            :id="'xkPie'"
-                            :title="'店铺类型统计'"
-                            :pieData="shop_type"
-                        ></xk-pie>
-                </el-col>
-                 <el-col :span="24">
-                   <xk-lines :id="'LineId'" :title="'全年用户数据分析'" :barData="monthData"></xk-lines>
-                </el-col>
+                    <el-col :span="14">
+                        <div id="map" style="width: 100%; height: 100%"></div>
+                    </el-col>
+                    <el-col :span="10">
+                        <xk-pie :id="'xkPie'" :title="'店铺类型统计'" :pieData="shop_type"  ></xk-pie>
+                    </el-col>
+                    <el-col :span="24">
+                    <xk-lines :id="'LineId'" :title="'全年用户数据分析'" :barData="monthData"></xk-lines>
+                    </el-col>
                 </el-col>
             </el-row>
         </div>
@@ -118,7 +97,7 @@ export default {
     mounted() {
         this.chinaConfigure(this.mapData);
         particlesJS("particles", particlesConfig);
-        //  填充店铺类型
+        //  填充店铺类型及评论总数转为数字
         item.RECORDS.forEach((items, index) => {
             items.item_key_word = items.item_info.split(" ")[0];
             items.review_count = items.review_count.split(" ")[0] * 1;
@@ -309,27 +288,27 @@ export default {
                     trigger: "item",
                     backgroundColor: "rgba(5,11,35,0.86)", //通过设置rgba调节背景颜色与透明度
                     formatter: function (params) {
-                        return `<div id="plan">
+                        return `<div id="plan" style="width:300px;">
             <h4 style="margin:16px;font-size:18px;font-weight:normal;color:#fff;">${params.name}</h4>
-            <ul style="margin:16px;color:#fff;">
-            <li style="color:#c9c9c9;font-size:12px"><span>店铺总数：</span>   <span style="color:#439aff;font-size:18px">${params.data.value}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num1[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num1[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num2[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num2[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:14px"><span>${params.data.num3[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num3[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num4[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num4[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num5[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num5[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num6[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num6[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num7[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num7[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num8[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num8[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num9[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num9[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num10[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num10[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num11[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num11[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num12[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num12[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num13[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num13[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num14[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num14[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num15[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num15[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num16[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num16[1]}</span>  <span>家</span></li>
-            <li style="color:#c9c9c9;font-size:12px"><span>${params.data.num17[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num17[1]}</span>  <span>家</span></li>
+            <ul style="margin:16px;color:#fff;width:100%;" class="plan-list">
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>店铺总数：</span>   <span style="color:#439aff;font-size:18px">${params.data.value}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num1[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num1[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num2[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num2[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:14px"><span>${params.data.num3[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num3[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num4[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num4[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num5[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num5[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num6[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num6[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num7[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num7[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num8[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num8[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num9[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num9[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num10[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num10[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num11[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num11[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num12[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num12[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num13[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num13[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num14[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num14[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num15[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num15[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num16[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num16[1]}</span>  <span>家</span></li>
+            <li style="color:#c9c9c9;width:50% !important;float: left;font-size:12px"><span>${params.data.num17[0]}：</span>  <span style="color:#439aff;font-size:18px">${params.data.num17[1]}</span>  <span>家</span></li>
             </ul>
             </div>`;
                     },
@@ -449,5 +428,8 @@ export default {
 }
 .row-center .el-col-24{
     height: 40% !important;
+}
+.plan-list>li{
+    width:50% !important;float: left;
 }
 </style>
